@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 
-import { CreateJobDto } from "./dto";
+import { CreateJobDto, GetAllJobsResponse } from "./dto";
 import { JobsRepository } from "./jobs.repository";
 
 @Injectable()
@@ -11,8 +11,17 @@ export class JobsService {
         return this.jobsRepository.create(data);
     }
 
-    getAllJobs() {
-        return this.jobsRepository.findAll();
+    getAllJobs(): GetAllJobsResponse[] {
+        return this.jobsRepository.findAll().map((job) => ({
+            id: job.jobId,
+            createdAt: job.createdAt,
+            status: job.status,
+            urlsCount: job.urls.length,
+            statistics: {
+                success: job.urls.filter((url) => url.status === "success").length,
+                failed: job.urls.filter((url) => url.status === "error").length,
+            },
+        }));
     }
 
     getJobById(id: string) {

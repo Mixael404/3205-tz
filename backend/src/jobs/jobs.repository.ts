@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { randomUUID } from "crypto";
 
-import { CreateJobDto, GetAllJobsResponse } from "./dto";
+import { CreateJobDto } from "./dto";
 import { Job, JobStatus, Url } from "./jobs.interface";
 
 @Injectable()
@@ -38,17 +38,12 @@ export class JobsRepository {
         return { jobId: id };
     }
 
-    findAll(): GetAllJobsResponse[] {
-        return this.jobs.map((job) => ({
-            id: job.jobId,
-            createdAt: job.createdAt,
-            status: job.status,
-            urlsCount: job.urls.length,
-            statistics: {
-                success: job.urls.filter((url) => url.status === "success").length,
-                failed: job.urls.filter((url) => url.status === "error").length,
-            },
-        }));
+    findAll(): Job[] {
+        return this.jobs;
+    }
+
+    findPending(): Job[] {
+        return this.jobs.filter((job) => job.status === "pending");
     }
 
     findById(id: string): Job {
@@ -60,6 +55,12 @@ export class JobsRepository {
     updateStatus(id: string, status: JobStatus) {
         const foundJob = this.findById(id);
         foundJob.status = status;
+        return foundJob.jobId;
+    }
+
+    update(id: string, job: Partial<Job>) {
+        const foundJob = this.findById(id);
+        Object.assign(foundJob, job);
         return foundJob.jobId;
     }
 }
