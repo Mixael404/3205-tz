@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit } from "@nestjs/common";
 
-import { Url } from "./jobs.interface";
+import { IUrl } from "./jobs.interface";
 import { JobsRepository } from "./jobs.repository";
 import { UrlChecker } from "./url-checker.provider";
 
@@ -62,7 +62,7 @@ export class JobProcessor implements OnModuleInit {
         this.jobsRepository.update(jobId, { status: hasError ? "failed" : "completed" });
     }
 
-    private async checkUrl(url: Url) {
+    private async checkUrl(url: IUrl) {
         const start = Date.now();
 
         Object.assign(url, {

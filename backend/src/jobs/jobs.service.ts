@@ -1,6 +1,7 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 
 import { CreateJobDto, GetAllJobsResponse } from "./dto";
+import { JobStatus } from "./jobs.interface";
 import { JobsRepository } from "./jobs.repository";
 
 @Injectable()
@@ -29,6 +30,13 @@ export class JobsService {
     }
 
     deleteJob(id: string) {
+        const validStatusesToBeCancelled: JobStatus[] = ["pending", "in_progress"];
+        const job = this.jobsRepository.findById(id);
+
+        if (!job) throw new NotFoundException("Job doesn't found");
+        if (!validStatusesToBeCancelled.includes(job.status))
+            throw new BadRequestException("Job could not be cancelled");
+
         return this.jobsRepository.updateStatus(id, "cancelled");
     }
 }

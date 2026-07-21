@@ -1,0 +1,80 @@
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+
+    &--pending {
+        background: #f1f5f9;
+        color: #475569;
+    }
+
+    &--in_progress {
+        background: #dbeafe;
+        color: #1d4ed8;
+    }
+
+    &--completed {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+    &--cancelled {
+        background: #f1f5f9;
+        color: #64748b;
+    }
+
+    &--failed {
+        background: #fee2e2;
+        color: #b91c1c;
+    }
+}
+
+.stats {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &__label {
+        font-size: 10px;
+        line-height: 1;
+        font-weight: 600;
+        min-width: 12px;
+
+        &--failed {
+            color: #7f1d1d;
+            text-align: right;
+        }
+
+        &--success {
+            color: #14532d;
+            text-align: left;
+        }
+    }
+
+    &__bar {
+        flex: 1;
+        display: flex;
+        height: 4px;
+        border-radius: 999px;
+        overflow: hidden;
+        background: #e5e7eb;
+    }
+
+    &__bar-segment {
+        height: 100%;
+
+        &--failed {
+            background: #ef4444;
+        }
+
+        &--success {
+            background: #22c55e;
+        }
+    }
+}

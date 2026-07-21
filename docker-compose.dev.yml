@@ -1,0 +1,8 @@
+services:
+  backend:
+    build:
+      target: dev
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app
+      - /app/node_modules

@@ -2,25 +2,25 @@ import { Injectable, InternalServerErrorException, NotFoundException } from "@ne
 import { randomUUID } from "crypto";
 
 import { CreateJobDto } from "./dto";
-import { Job, JobStatus, Url } from "./jobs.interface";
+import { IJob, JobStatus, IUrl } from "./jobs.interface";
 
 @Injectable()
 export class JobsRepository {
-    private jobs: Job[] = [];
+    private jobs: IJob[] = [];
 
-    create(job: CreateJobDto): Pick<Job, "jobId"> {
+    create(job: CreateJobDto): Pick<IJob, "jobId"> {
         const id = randomUUID();
 
         if (this.jobs.some((existingJob) => existingJob.jobId === id)) {
             throw new InternalServerErrorException("Job id collision, please retry");
         }
 
-        const urls: Url[] = job.urls.map((url) => ({
+        const urls: IUrl[] = job.urls.map((url) => ({
             url,
             status: "pending",
         }));
 
-        const newJob: Job = {
+        const newJob: IJob = {
             jobId: id,
             status: "pending",
             createdAt: new Date(),
@@ -38,15 +38,15 @@ export class JobsRepository {
         return { jobId: id };
     }
 
-    findAll(): Job[] {
+    findAll(): IJob[] {
         return this.jobs;
     }
 
-    findPending(): Job[] {
+    findPending(): IJob[] {
         return this.jobs.filter((job) => job.status === "pending");
     }
 
-    findById(id: string): Job {
+    findById(id: string): IJob {
         const foundJob = this.jobs.find((job) => job.jobId === id);
         if (!foundJob) throw new NotFoundException("Job not found");
         return foundJob;
@@ -58,7 +58,7 @@ export class JobsRepository {
         return foundJob.jobId;
     }
 
-    update(id: string, job: Partial<Job>) {
+    update(id: string, job: Partial<IJob>) {
         const foundJob = this.findById(id);
         Object.assign(foundJob, job);
         return foundJob.jobId;

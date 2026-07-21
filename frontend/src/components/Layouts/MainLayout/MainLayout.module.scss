@@ -1,0 +1,29 @@
+.layout {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 80% 20%;
+    height: 100vh;
+
+    &__top-left {
+        min-height: 0;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 1px 0 rgba(15, 23, 42, 0.08);
+    }
+
+    &__top-right {
+        min-height: 0;
+        overflow: hidden;
+        background: #ffffff;
+        border-left: 1px solid #e2e8f0;
+    }
+
+    &__bottom {
+        grid-column: 1 / -1;
+        min-height: 0;
+        overflow: hidden;
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+    }
+}

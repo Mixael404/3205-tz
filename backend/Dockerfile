@@ -6,7 +6,7 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 COPY . .
 EXPOSE 3000
-CMD ["sh", "-c", "yarn install --frozen-lockfile && yarn start:dev"]
+CMD ["yarn", "start:dev"]
 
 FROM base AS builder
 COPY package.json yarn.lock ./

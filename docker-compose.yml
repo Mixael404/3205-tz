@@ -3,7 +3,9 @@ name: "3205"
 services:
   backend:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     env_file:
-      - .env
+      - ./backend/.env
+    ports:
+      - "3000:3000"
