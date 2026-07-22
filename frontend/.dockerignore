@@ -6,4 +6,3 @@ coverage
 *.md
 Dockerfile
 .dockerignore
-.env
