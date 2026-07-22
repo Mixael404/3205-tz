@@ -5,7 +5,18 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+      target: production
     env_file:
       - ./backend/.env
     ports:
       - "3000:3000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: production
+    env_file:
+      - ./frontend/.env
+    ports:
+      - "5173:5173"

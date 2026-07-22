@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, type FC } from "react";
+import { useCallback, useEffect, type FC } from "react";
 import SimpleBar from "simplebar-react";
 
 import { useDispatch, useSelector } from "react-redux";
