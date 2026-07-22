@@ -1,0 +1,77 @@
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+
+    &--pending {
+        background: #f1f5f9;
+        color: #475569;
+    }
+
+    &--in_progress {
+        background: #dbeafe;
+        color: #1d4ed8;
+    }
+
+    &--completed {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+    &--cancelled {
+        background: #f1f5f9;
+        color: #64748b;
+    }
+
+    &--failed {
+        background: #fee2e2;
+        color: #b91c1c;
+    }
+
+    &--success {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+    &--error {
+        background: #fee2e2;
+        color: #b91c1c;
+    }
+}
+
+.progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &__bar {
+        flex: 1;
+        display: flex;
+        height: 6px;
+        border-radius: 999px;
+        overflow: hidden;
+        background: #e2e8f0;
+    }
+
+    &__segment {
+        height: 100%;
+
+        &--success {
+            background: #22c55e;
+        }
+
+        &--failed {
+            background: #ef4444;
+        }
+
+        &--cancelled {
+            background: #94a3b8;
+        }
+    }
+}

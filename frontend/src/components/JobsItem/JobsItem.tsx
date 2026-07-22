@@ -1,12 +1,11 @@
 import React, { type FC } from "react";
-import { Ban } from "lucide-react";
 
-import type { IJob } from "../../model/job";
+import type { IJobShort } from "../../model/job";
 
 import styles from "./JobsItem.module.scss";
 
 interface IJobsItem {
-  job: IJob;
+  job: IJobShort;
   clickJobCardHandler: (id: string) => void;
 }
 
@@ -16,12 +15,9 @@ const JobsItem: FC<IJobsItem> = ({ job, clickJobCardHandler }) => {
   const successPercent = total > 0 ? (success / total) * 100 : 0;
   const failedPercent = total > 0 ? 100 - successPercent : 0;
 
-  const setActiveJobId = () => clickJobCardHandler(job.id);
-
-  const handleCancelClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    console.log(job.id);
-  };
+  const setActiveJobId = () => {
+    clickJobCardHandler(job.id);
+  }
 
   return (
     <div
@@ -38,14 +34,6 @@ const JobsItem: FC<IJobsItem> = ({ job, clickJobCardHandler }) => {
           >
             {job.status}
           </span>
-          <button
-            type="button"
-            title="Cancel job"
-            onClick={handleCancelClick}
-            className="p-1 rounded text-red-300 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
-          >
-            <Ban size={14} />
-          </button>
         </div>
       </div>
       <div className="text-sm text-slate-600">

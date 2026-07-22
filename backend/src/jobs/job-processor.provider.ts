@@ -7,7 +7,7 @@ import { UrlChecker } from "./url-checker.provider";
 @Injectable()
 export class JobProcessor implements OnModuleInit {
     private readonly URL_CONCURRENCY = 5;
-    private readonly JOB_CUNCURRENCY = 2;
+    private readonly JOB_CONCURRENCY = 2;
     private readonly ACTIVE_JOBS = new Set<string>();
     private readonly POLL_INTERVAL = 1000;
     private readonly MAX_DELAY = 10000;
@@ -25,7 +25,7 @@ export class JobProcessor implements OnModuleInit {
         const pendingJobs = this.jobsRepository.findPending();
 
         for (const job of pendingJobs) {
-            if (this.ACTIVE_JOBS.size >= this.JOB_CUNCURRENCY) break;
+            if (this.ACTIVE_JOBS.size >= this.JOB_CONCURRENCY) break;
             if (this.ACTIVE_JOBS.has(job.jobId)) continue;
 
             this.ACTIVE_JOBS.add(job.jobId);

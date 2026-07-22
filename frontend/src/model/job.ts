@@ -7,12 +7,19 @@ export interface IJobStatistics {
     failed: number;
 }
 
-export interface IJob {
+export interface IJobShort {
     id: string;
     status: JobStatus;
     createdAt: Date;
-    urls: IUrl[];
     statistics: IJobStatistics;
+    urlsCount: number;
+}
+
+export interface IJob {
+    jobId: string;
+    status: JobStatus;
+    createdAt: Date;
+    urls: IUrl[];
 }
 
 export interface IUrl {

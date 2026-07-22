@@ -10,9 +10,7 @@ interface IMainLayout {
 const MainLayout: FC<IMainLayout> = ({ children }) => {
     return (
         <div className={styles["layout"]}>
-            <div className={styles["layout__top-left"]}>{children}</div>
-            <div className={styles["layout__top-right"]} />
-            <div className={styles["layout__bottom"]} />
+            {children}
         </div>
     );
 };

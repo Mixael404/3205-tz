@@ -17,9 +17,24 @@ const JobsList: FC = () => {
   const jobsList = useSelector(jobsSelector);
   const isJobsLoading = useSelector(isJobsLoadingSelector);
 
+  const hasActiveJobs = jobsList.some(
+    (job) => job.status === "pending" || job.status === "in_progress"
+  );
+
   useEffect(() => {
     dispatch(fetchJobs());
   }, []);
+
+  useEffect(() => {
+    if (!hasActiveJobs) return;
+
+    const intervalId = setInterval(() => {
+      dispatch(fetchJobs());
+    }, 30000);
+
+    return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasActiveJobs]);
 
   const clickJobCardHandler = useCallback((id: string) => {
     dispatch(setActiveJobId(id));
